@@ -15,12 +15,20 @@ This simple small application is written in Python 3 so it is portable.
 parser.add_argument('-w','--width',type=int,default=shutil.get_terminal_size((80,20))[0],help="""Number of characters that will be sent to 'toilet'. Defaults to width i.e. number of columns (characters) of terminal emulator (as determined by the Python 3 method 'shutil.get_terminal_size'.""")
 args=parser.parse_args()
 l=os.listdir('.')
+t=""
 for f in l:
   if os.path.isfile(f):
     with open(f) as file:
-      for line in file:
-        line=line.lstrip().rstrip().replace(' ','').replace('\t','')
-        for i in range(0,len(line),args.width):
-          s=line[i:i+args.width]
-          subprocess.run(['toilet','--width',str(args.width),'--filter','gay',s])
+      i=1
+      while True:
+        if i >= args.width:
+          subprocess.run(['toilet','--termwidth','--filter','gay',t])
           time.sleep(0.27)
+          i=1
+          t=""
+        char=file.read(1)
+        if not char.isspace() and not len(char) == 0:
+          t=t+char
+          i=i+1
+        if not char:
+          break

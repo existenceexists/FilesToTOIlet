@@ -20,12 +20,12 @@ t=""
 for f in l:
   if os.path.isfile(f):
     with open(f) as file:
-      i=1
+      i=0
       while True:
         if i >= args.width:
           subprocess.run(list(c),input=t,text=True)
           time.sleep(args.sleep)
-          i=1
+          i=0
           t=""
         char=file.read(1)
         if not char.isspace() and not len(char) == 0:

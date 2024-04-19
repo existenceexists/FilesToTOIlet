@@ -28,8 +28,8 @@ for f in l:
           i=0
           t=""
         char=file.read(1)
-        if not char.isspace() and not len(char) == 0:
-          t=t+char
-          i=i+1
         if not char:
           break
+        if not char.isspace():
+          t=t+char
+          i=i+1

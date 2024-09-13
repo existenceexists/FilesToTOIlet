@@ -45,7 +45,13 @@ for f in os.listdir(dir):
           j=j+1
           i=i+1
           continue
-        char=file.read(1)
+        try:
+          char=file.read(1)
+        except UnicodeDecodeError as e:
+          print("Error! Aborting. Tried to read the following file but it was not in utf-8 encoding: ")
+          print("'"+f+"'")
+          print()
+          raise e
         if not char:
           break
         if newline is True:

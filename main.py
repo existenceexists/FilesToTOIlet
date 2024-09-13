@@ -14,14 +14,18 @@ parser.add_argument('-w','--width',type=int,default=int(shutil.get_terminal_size
 parser.add_argument('-s','--sleep',type=float,default=0.1,help="""How fast this application will run. Time in seconds as a number with decimal point (i.e. floating point number) that specify the time that the script will wait (sleep) between output of each call to TOIlet. Default value is 0.1 (i.e. 0.1 seconds).""")
 parser.add_argument('-d','--delimiter',type=str,default=" ",help="""How each line of each file will be separated from next line. Default value is " " i.e. an empty space. If you want each line of each file to be printed on a separate line then set this to "\n".""")
 parser.add_argument('-c','--command',type=str,default="toilet --termwidth --filter gay",help="""Custom call to CLI utility TOIlet. Run the CLI command 'man toilet' and 'toilet --help' to see how to use it. Default value is 'toilet --termwidth --filter gay'. The input text for TOIlet will be automatically sent to each TOIlet call with this command via stdin (standart input).""")
+parser.add_argument('dir',nargs='?',type=str,default=os.getcwd(),help="""Directory where to look for files to be processed. If not specified, the current working directory will be used.""")
 args=parser.parse_args()
+dir=os.path.abspath(args.dir)
+if not os.path.isdir(dir):
+  raise Exception("Error! The value given as positional argument 'dir' is not an existing directory. The value given was: '"+args.dir+"'")
 c=shlex.split(args.command)
 dl=len(args.delimiter)
 adddelimiter=False
 j=0
-l=os.listdir('.')
 t=""
-for f in l:
+for f in os.listdir(dir):
+  f=os.path.join(dir,f)
   if os.path.isfile(f):
     with open(f) as file:
       i=0

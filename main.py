@@ -6,7 +6,7 @@ import shutil
 import shlex
 import time
 parser=argparse.ArgumentParser(
-  prog='FilesCharsToTOIlet',
+  prog='FilesToTOIlet',
   description="""
 Small simple wrapper around the CLI (Command Line Interface) utility TOIlet. The original intention was to create a long-lasting stream of colorful ascii art filling the whole screen. This application tries to achieve it by reading all plain text files contained in a specified directory (excluding subdirectories) and converting them into colorful ascii art. Run the main script with the CLI argument '--help' to see description of this application and how to use its CLI arguments. The CLI arguments '--command', '--width', 'dir' are important and are expected to be always used and played with. The CLI utility TOIlet (https://github.com/cacalabs/toilet) is used by this application and is required to be installed and found in $PATH. Because this script is small and simple it can be easily modified and played with. It is written in Python 3 so it is portable.
 """)
